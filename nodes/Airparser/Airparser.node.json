@@ -1,0 +1,18 @@
+{
+	"node": "n8n-nodes-airparser",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Development", "Data & Storage", "Utility", "Productivity"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://help.airparser.com/"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://help.airparser.com/"
+			}
+		]
+	}
+}

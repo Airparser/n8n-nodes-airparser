@@ -1,0 +1,64 @@
+{
+	"name": "n8n-nodes-airparser",
+	"version": "0.1.0",
+	"description": "Official n8n Airparser node. Use Airparser in n8n to extract structured data from emails, PDFs, images, and other documents, then route the extracted data anywhere in your automation.",
+	"license": "MIT",
+	"homepage": "https://airparser.com",
+	"keywords": [
+		"n8n-community-node-package",
+		"airparser",
+		"airparser.com",
+		"automation",
+		"data extraction",
+		"parser",
+		"document parser",
+		"email parser",
+		"pdf parser",
+		"html parser",
+		"excel parser",
+		"image parser",
+		"png parser",
+		"jpg parser",
+		"word parser"
+	],
+	"author": {
+		"name": "Airparser",
+		"email": "hi@airparser.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Airparser/n8n-nodes-airparser"
+	},
+	"scripts": {
+		"build": "n8n-node build",
+		"build:watch": "tsc --watch",
+		"dev": "n8n-node dev",
+		"lint": "n8n-node lint",
+		"lint:fix": "n8n-node lint --fix",
+		"release": "n8n-node release",
+		"prepublishOnly": "n8n-node prerelease"
+	},
+	"files": [
+		"dist"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"strict": true,
+		"credentials": [
+			"dist/credentials/AirparserApi.credentials.js"
+		],
+		"nodes": [
+			"dist/nodes/Airparser/Airparser.node.js"
+		]
+	},
+	"devDependencies": {
+		"@n8n/node-cli": "*",
+		"eslint": "9.32.0",
+		"prettier": "3.6.2",
+		"release-it": "^19.0.4",
+		"typescript": "5.9.2"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	}
+}
