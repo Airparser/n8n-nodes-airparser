@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-airparser",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "Official n8n Airparser node. Use Airparser in n8n to extract structured data from emails, PDFs, images, and other documents, then route the extracted data anywhere in your automation.",
 	"license": "MIT",
 	"homepage": "https://airparser.com",
