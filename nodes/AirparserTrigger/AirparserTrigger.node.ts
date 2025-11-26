@@ -46,12 +46,13 @@ export class AirparserTrigger implements INodeType {
 				description: 'Select the event to trigger the workflow',
 				default: 'doc.parsed',
 				options: [
-					{ name: 'Document processed', value: 'doc.parsed' },
+					{ name: 'Document Processed', value: 'doc.parsed' },
 					// ... more trigger events fo here
 				],
 			},
 			...triggerProperties,
 		],
+		usableAsTool: true,
 	};
 
 	methods = {

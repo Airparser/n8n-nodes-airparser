@@ -60,7 +60,7 @@ export async function create(this: IHookFunctions): Promise<boolean> {
 			staticData.hookId = (response as { _id: string })._id;
 		}
 		return true;
-	} catch (error) {
+	} catch {
 		return false;
 	}
 }
@@ -81,7 +81,7 @@ export async function deleteWebhook(this: IHookFunctions): Promise<boolean> {
 			},
 		);
 		return true;
-	} catch (error) {
+	} catch {
 		// If webhook doesn't exist, consider it deleted
 		return true;
 	}
