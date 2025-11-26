@@ -5,6 +5,7 @@
 [About](#about)  
 [Operations](#operations)  
 [Credentials](#credentials)  
+[Usage](#usage)  
 [Resources](#resources)
 
 ## About
@@ -13,73 +14,93 @@
 
 This official **n8n Node** allows you to:
 
-✅ Import binary files (PDF, images, emails, etc.) into an Airparser inbox  
-✅ Import HTML or text content directly into an Airparser inbox  
-✅ Extract structured data from documents automatically  
-✅ Add custom metadata to link documents to external systems
+✅ Import documents into Airparser for parsing  
+✅ Automatically trigger workflows when documents are parsed  
+✅ Extract structured data and use it in your automation workflows
 
 ## Operations
 
-### Document Operations
+### Airparser Actions
 
 - **Import Document From File**
-  - Upload a binary file (PDF, image, email, etc.) into an Airparser inbox
-  - Supports custom filename and additional metadata
-  - Works seamlessly with binary data from previous n8n nodes
+  - Use when you have a binary file (PDF, image, email attachment, etc.)
+  - Example: Send files uploaded to a Google Drive folder to Airparser for data extraction
+  - Automatically extracts structured data from the document
 
 - **Import Text/HTML Document**
-  - Upload HTML or text content directly into an Airparser inbox
-  - Supports custom filename and additional metadata
-  - Perfect for parsing web content or text-based documents
+  - Use when you have HTML pages, email content, or plain text
+  - Example: Parse HTML from a website or email body content
+  - Perfect for extracting data from web pages or text-based content
+
+### Airparser Trigger
+
+- **Document Parsed**
+  - Automatically starts your workflow when a document is parsed in Airparser
+  - Receives the extracted data and passes it to the next node
+  - Built-in security to protect your webhook
 
 ## Credentials
 
 ### Airparser API Key
 
-To connect n8n with your Airparser account, you'll need an **API Key**.
-
 1. Sign in to your [Airparser account](https://app.airparser.com/account)
-2. Navigate to your account settings
+2. Go to your account settings
 3. Copy your **API Key**
 
 In n8n:
 
 - Click **"Add Credential"** and search for **"Airparser API"**
-- Paste your API Key into the **Airparser API Key** field
+- Paste your API Key
 
 For more information, visit the [Airparser documentation](https://help.airparser.com/).
 
 ## Usage
 
+### Airparser Trigger
+
+**Quick Start:**
+
+1. Add the **Airparser Trigger** node to your workflow
+2. Select **"Document processed"** as the event
+3. Choose the **Inbox** where you want to receive events
+4. Activate your workflow
+
+That's it! Your workflow will now automatically run whenever a document is parsed in the selected inbox.
+
+**What happens:**
+
+- When a document is parsed in your Airparser inbox, the trigger receives the extracted data
+- The data is automatically passed to the next node in your workflow
+- You can use this data in any n8n node (send emails, update databases, create records, etc.)
+
+**Example Use Cases:**
+
+- **Email Notifications**: Send an email notification when an invoice is parsed
+- **Data Logging**: Save parsed data to Google Sheets or Airtable
+- **CRM Updates**: Create or update records in your CRM when documents are processed
+- **Approval Workflows**: Route documents for approval based on parsed data
+
 ### Import Document From File
 
 1. Select the **Import Document From File** operation
-2. Choose an **Inbox** from the dropdown (or search for it)
-3. Enter the **Document File (Binary)** property name from a previous node (e.g., "data")
-4. Optionally specify a custom **Filename** (include the file extension if possible)
-5. Optionally add **Additional Metadata** as a JSON object (e.g., `{"orderId": "12345", "customerId": "abc"}`)
+2. Choose an **Inbox** from the dropdown
+3. Enter the **Document File (Binary)** property name (usually "data")
+4. Optionally add a custom **Filename** or **Additional Metadata**
 
 **Example workflow:**
 
-- Use a "Read Binary File" node to read a PDF
-- Connect it to the Airparser node
-- Set "Document File (Binary)" to "data" (or the property name from the previous node)
-- Airparser will extract structured data from the document
+- Read a PDF file → Airparser node → Extract data → Use in next steps
 
 ### Import Text/HTML Document
 
 1. Select the **Import Text/HTML Document** operation
-2. Choose an **Inbox** from the dropdown (or search for it)
-3. Enter the **HTML/Text Content** (you can paste HTML directly or use an expression)
-4. Optionally specify a custom **Filename** (include the file extension if possible)
-5. Optionally add **Additional Metadata** as a JSON object
+2. Choose an **Inbox** from the dropdown
+3. Enter the **HTML/Text Content** (paste directly or use an expression)
+4. Optionally add a custom **Filename** or **Additional Metadata**
 
 **Example workflow:**
 
-- Use an HTTP Request node to fetch HTML content
-- Connect it to the Airparser node
-- Use an expression like `{{$json.body}}` to pass the HTML content
-- Airparser will extract structured data from the HTML
+- Fetch HTML from a website → Airparser node → Extract data → Process results
 
 ## Resources
 
