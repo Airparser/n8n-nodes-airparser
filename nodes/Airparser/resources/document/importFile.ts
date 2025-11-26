@@ -18,7 +18,7 @@ export const importFileDescription: INodeProperties[] = [
 			'The name of the binary property from a previous node that contains the document file to parse. Enter the property name that holds the binary data (e.g., "data").',
 		name: 'fileBinary',
 		type: 'string',
-		default: '',
+		default: 'data',
 		required: true,
 		displayOptions: { show: showOnlyForImportFile },
 	},
