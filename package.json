@@ -48,7 +48,8 @@
 			"dist/credentials/AirparserApi.credentials.js"
 		],
 		"nodes": [
-			"dist/nodes/Airparser/Airparser.node.js"
+			"dist/nodes/Airparser/Airparser.node.js",
+			"dist/nodes/AirparserTrigger/AirparserTrigger.node.js"
 		]
 	},
 	"devDependencies": {
