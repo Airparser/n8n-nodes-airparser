@@ -69,22 +69,36 @@ export const importHtmlPreSend: PreSendAction = async function (this, requestOpt
 	const customFilename = (this.getNodeParameter('filename', 0) as string | undefined) || '';
 
 	// Determine filename: custom > default
-	const filename = customFilename || 'document.html';
+	let filename = customFilename || 'document.html';
 
-	// Determine content type: only set to 'text/html' if filename has no extension
-	// or has a non-text extension
-	// Known text extensions that should auto-detect content type
-	const knownTextExtensions = ['txt', 'eml'];
+	// Map supported extensions to their content types
+	const extensionContentTypes: Record<string, string> = {
+		eml: 'message/rfc822',
+		html: 'text/html',
+		htm: 'text/html',
+		txt: 'text/plain',
+	};
 
 	// Extract file extension (lowercase)
 	const extensionMatch = filename.match(/\.(\w+)$/);
 	const extension = extensionMatch ? extensionMatch[1].toLowerCase() : null;
 
-	// Set contentType to 'text/html' only if:
-	// - No extension, OR
-	// - Extension exists but is NOT a known text extension
-	const fileContentType =
-		extension && knownTextExtensions.includes(extension) ? undefined : 'text/html';
+	// Determine content type based on extension
+	let fileContentType: string | undefined;
+	if (extension && extensionContentTypes[extension]) {
+		// Use the mapped content type for supported extensions (EML, HTML, TXT)
+		fileContentType = extensionContentTypes[extension];
+	} else {
+		// For unknown extensions or no extension, use 'text/html' and add .html extension if not provided
+		fileContentType = 'text/html';
+		if (!extension) {
+			// No extension found, add .html if not already present
+			if (!filename.endsWith('.html') && !filename.endsWith('.htm')) {
+				filename = `${filename}.html`;
+			}
+		}
+		// If extension exists but is not in our supported list, keep the filename as is but use text/html content type
+	}
 
 	// Convert HTML string to Buffer
 	const htmlBuffer = getBufferConstructor().from(htmlContent, 'utf-8');
