@@ -76,7 +76,7 @@ export class AirparserTrigger implements INodeType {
 		const staticData = this.getWorkflowStaticData('node');
 		const webhookSecret = staticData.webhookSecret as string | undefined;
 		if (webhookSecret) {
-			const receivedSecret = headers['x-webhook-secret'] as string | undefined;
+			const receivedSecret = headers['x-airparser-secret'] as string | undefined;
 			if (receivedSecret !== webhookSecret) {
 				return {
 					webhookResponse: {

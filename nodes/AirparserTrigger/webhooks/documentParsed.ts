@@ -15,28 +15,6 @@ function generateWebhookSecret(): string {
 }
 
 export async function checkExists(this: IHookFunctions): Promise<boolean> {
-	// const inboxParam = this.getNodeParameter('inbox', 0) as
-	// 	| { __rl: true; value: string }
-	// 	| { value: string }
-	// 	| string;
-	// const inboxId = typeof inboxParam === 'string' ? inboxParam : inboxParam?.value || '';
-
-	// const webhookUrl = this.getNodeWebhookUrl('default');
-	// if (!webhookUrl) {
-	// 	return false;
-	// }
-
-	// try {
-	// 	const exists = await airparserApiRequest.call(this, 'GET', `/n8n/check-exists`, {
-	// 		webhook_url: webhookUrl,
-	// 		inbox_id: inboxId,
-	// 	});
-	// 	// Server returns boolean directly
-	// 	return exists === true;
-	// } catch (error) {
-	// 	// If error, webhook doesn't exist
-	// 	return false;
-	// }
 	const staticData = this.getWorkflowStaticData('node');
 	return !!staticData.hookId;
 }
