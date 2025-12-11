@@ -28,7 +28,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Airparser/n8n-nodes-airparser"
+		"url": "git+https://github.com/Airparser/n8n-nodes-airparser.git"
 	},
 	"scripts": {
 		"build": "n8n-node build",
