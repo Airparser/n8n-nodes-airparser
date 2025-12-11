@@ -1,6 +1,11 @@
 import type { INodeProperties, IDataObject, PreSendAction } from 'n8n-workflow';
 import { inboxSelect } from '../../shared/descriptions';
-import { getBufferConstructor, createMultipartBody } from '../../shared/utils';
+import { createMultipartBody } from '../../shared/utils';
+
+// Buffer is available globally in Node.js runtime
+declare const Buffer: {
+	from(data: string, encoding?: string): Uint8Array;
+};
 
 const showOnlyForImportHtml = {
 	operation: ['importTextHtml'],
@@ -101,7 +106,7 @@ export const importHtmlPreSend: PreSendAction = async function (this, requestOpt
 	}
 
 	// Convert HTML string to Buffer
-	const htmlBuffer = getBufferConstructor().from(htmlContent, 'utf-8');
+	const htmlBuffer = Buffer.from(htmlContent, 'utf-8');
 
 	// Build additional fields for multipart body (NestJS will parse these from @Body() dto)
 	const additionalFields: Record<string, string> = {};

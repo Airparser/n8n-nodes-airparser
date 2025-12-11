@@ -1,24 +1,15 @@
-// Helper to get Buffer constructor without TypeScript/linting errors
-export function getBufferConstructor(): {
+// Buffer is available globally in Node.js runtime
+// Type declaration for TypeScript
+declare const Buffer: {
 	from(data: string, encoding?: string): Uint8Array;
 	concat(arrays: Uint8Array[]): Uint8Array;
-} {
-	// Buffer is available in Node.js runtime
-	// Use Function constructor to access Buffer without triggering linting rules
-	const getBuffer = new Function('return typeof Buffer !== "undefined" ? Buffer : null') as () => {
-		from(data: string, encoding?: string): Uint8Array;
-		concat(arrays: Uint8Array[]): Uint8Array;
-	} | null;
-	const BufferRef = getBuffer();
-	return BufferRef!;
-}
+};
 
 // Helper to create multipart/form-data body manually
 export function createMultipartBody(
 	file: { value: Uint8Array; filename: string; contentType?: string },
 	fields?: Record<string, string>,
 ): { body: Uint8Array; contentType: string } {
-	const Buffer = getBufferConstructor();
 	const boundary = `----n8n-${Date.now()}-${Math.random().toString(36).substring(2, 15)}`;
 	const parts: Uint8Array[] = [];
 
