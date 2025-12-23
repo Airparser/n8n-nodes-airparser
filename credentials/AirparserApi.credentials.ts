@@ -10,7 +10,8 @@ export class AirparserApi implements ICredentialType {
 	name = 'airparserApi';
 	displayName = 'Airparser API';
 	icon: Icon = 'file:../icons/airparser.svg';
-	documentationUrl = 'https://help.airparser.com/';
+	documentationUrl =
+		'https://help.airparser.com/data-export-integrations/n8n-integration#authentication';
 
 	properties: INodeProperties[] = [
 		{

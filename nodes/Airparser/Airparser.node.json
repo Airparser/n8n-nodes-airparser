@@ -6,12 +6,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://help.airparser.com/"
+				"url": "https://help.airparser.com/data-export-integrations/n8n-integration#authentication"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://help.airparser.com/"
+				"url": "https://help.airparser.com/data-export-integrations/n8n-integration"
 			}
 		]
 	}
