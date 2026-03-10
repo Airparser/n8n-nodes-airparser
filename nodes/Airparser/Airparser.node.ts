@@ -2,6 +2,8 @@ import { NodeConnectionTypes, type INodeType, type INodeTypeDescription } from '
 import { getInboxes } from './listSearch/getInboxes';
 import { importFileDescription, importFilePreSend } from './resources/document/importFile';
 import { importHtmlDescription, importHtmlPreSend } from './resources/document/importHtml';
+import { importFileSyncDescription, importFileSyncPreSend } from './resources/document/importFileSync';
+import { importHtmlSyncDescription, importHtmlSyncPreSend } from './resources/document/importHtmlSync';
 
 export class Airparser implements INodeType {
 	description: INodeTypeDescription = {
@@ -45,10 +47,34 @@ export class Airparser implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'Import Document From File',
+						name: 'Import File',
+						value: 'importFileSync',
+						description: 'Import a binary file into an inbox and return extracted data immediately',
+						action: 'Import a binary file into an inbox and return extracted data immediately',
+						routing: {
+							send: {
+								preSend: [importFileSyncPreSend],
+							},
+						},
+					},
+
+					{
+						name: 'Import Text/HTML',
+						value: 'importTextHtmlSync',
+						description: 'Import a text/HTML document into an inbox and return extracted data immediately',
+						action: 'Import a text html document into an inbox and return extracted data immediately',
+						routing: {
+							send: {
+								preSend: [importHtmlSyncPreSend],
+							},
+						},
+					},
+
+					{
+						name: 'Import File (Async)',
 						value: 'importFile',
-						description: 'Import a binary file into an inbox and extract structured data',
-						action: 'Import a binary file into an inbox and extract structured data',
+						description: 'Import a binary file into an inbox asynchronously and return the document ID',
+						action: 'Import a binary file into an inbox asynchronously and return the document ID',
 						routing: {
 							send: {
 								preSend: [importFilePreSend],
@@ -57,10 +83,10 @@ export class Airparser implements INodeType {
 					},
 
 					{
-						name: 'Import Text/HTML Document',
+						name: 'Import Text/HTML (Async)',
 						value: 'importTextHtml',
-						description: 'Import a text/html document into an inbox and extract structured data',
-						action: 'Import a text html document into an inbox and extract structured data',
+						description: 'Import a text/HTML document into an inbox asynchronously and return the document ID',
+						action: 'Import a text html document into an inbox asynchronously and return the document ID',
 						routing: {
 							send: {
 								preSend: [importHtmlPreSend],
@@ -68,9 +94,11 @@ export class Airparser implements INodeType {
 						},
 					},
 				],
-				default: 'importFile',
+				default: 'importFileSync',
 				displayOptions: { show: { resource: ['document'] } },
 			},
+			...importFileSyncDescription,
+			...importHtmlSyncDescription,
 			...importFileDescription,
 			...importHtmlDescription,
 		],
